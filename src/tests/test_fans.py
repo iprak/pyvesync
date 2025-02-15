@@ -79,6 +79,8 @@ class TestAirPurifiers(TestBase):
         after the device variable value
     base_methods : List[List[str, Dict[str, Any]]]
         List of common methods for all devices
+    common_methods : List[List[str, Dict[str, Any]]]
+        List of methods implemented by all the devices
     device_methods : Dict[List[List[str, Dict[str, Any]]]]
         Dictionary of methods specific to device types
 
@@ -260,6 +262,8 @@ class TestHumidifiers(TestBase):
         after the device variable value
     base_methods : List[List[str, Dict[str, Any]]]
         List of common methods for all devices
+    common_methods : List[List[str, Dict[str, Any]]]
+        List of methods implemented by all the devices
     device_methods : Dict[List[List[str, Dict[str, Any]]]]
         Dictionary of methods specific to device types
 
@@ -274,7 +278,8 @@ class TestHumidifiers(TestBase):
     --------
     >>> device = 'humidifiers'
     >>> humidifiers = call_json_fans.HUMID_MODELS
-    >>> base_methods = [['turn_on'], ['turn_off'], ['update']]
+    >>> base_methods = []
+    >>> common_methods = [['turn_on'], ['turn_off'], ['update']]
     >>> device_methods = {
         'ESWD16': [['method1'], ['method2', {'kwargs': 'value'}]]
         }
@@ -283,14 +288,18 @@ class TestHumidifiers(TestBase):
 
     device = 'humidifiers'
     humidifiers = call_json_fans.HUMID_MODELS
-    base_methods = [['turn_on'], ['turn_off'], ['turn_on_display'], ['turn_off_display'],
-                    ['automatic_stop_on'], ['automatic_stop_off'],
-                    ['set_humidity', {'humidity': 50}], ['set_auto_mode'],
-                    ['set_manual_mode'], ['set_mist_level', {'level': 2}]
-                    ]
+    base_methods = []
+    common_methods = [
+        ['turn_on'], ['turn_off'], ['turn_on_display'], ['turn_off_display'],
+        ['set_humidity', {'humidity': 50}], ['set_auto_mode'],
+        ['set_manual_mode'], ['set_mist_level', {'level': 2}],
+    ]
     device_methods = {
-        'LUH-A602S-WUSR': [['set_warm_level', {'warm_level': 3}]],
-        'LEH-S601S-WUS': [['set_drying_mode_enabled', { 'mode': False }]]
+        'LUH-A602S-WUSR': [
+            ['automatic_stop_on'], ['automatic_stop_off'],
+            ['set_warm_level', {'warm_level': 3}]],
+        'LEH-S601S-WUS': [
+            ['set_drying_mode_enabled', { 'mode': False }]]
     }
 
     def test_details(self, dev_type, method):

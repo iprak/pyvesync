@@ -52,6 +52,11 @@ def method_generator(metafunc, gen_type, devices):
     else:
         base_methods = []
     call_dict = {dt: base_methods.copy() for dt in devices}
+    if 'common_methods' in metafunc.cls.__dict__:
+        common_methods = metafunc.cls.__dict__['common_methods']
+    else:
+        common_methods = []
+    call_dict = {dt: common_methods.copy() for dt in devices}
     if 'device_methods' in metafunc.cls.__dict__:
         dev_methods = metafunc.cls.__dict__['device_methods']
         for dev in call_dict:
