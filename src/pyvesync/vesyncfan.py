@@ -2799,14 +2799,6 @@ class VeSyncSuperior6000S(VeSyncBaseDevice):
         """Set humidity mode to manual."""
         return self.set_humidity_mode('manual')
 
-    def automatic_stop_on(self) -> bool:
-        """Set humidity mode to auto."""
-        return self.set_humidity_mode('auto')
-
-    def automatic_stop_off(self) -> bool:
-        """Set humidity mode to manual."""
-        return self.set_humidity_mode('manual')
-
     def set_mist_level(self, level) -> bool:
         """Set humidifier mist level with int between 0 - 9."""
         try:
